@@ -17,7 +17,7 @@ model Lead {
   email       String
   phone       String?
   company     String?
-  projectType String   // "Health Tech" | "General" | "Other"
+  projectType String   // Tipo de proyecto (texto libre)
   message     String   @db.Text
   budget      String?
   source      String   @default("landing-page") // "landing-page" | "contact-form" | etc.

@@ -260,7 +260,7 @@ export default function LeadsTable({ initialLeads, initialPagination }: LeadsTab
                 />
                 <button
                   type="submit"
-                  className="px-6 py-2 bg-primary-blue text-white rounded-lg hover:bg-[#00b8e6] transition-colors"
+                  className="px-6 py-2 bg-primary-blue text-white rounded-lg hover:bg-brand-blue transition-colors"
                 >
                   <i className="fas fa-search"></i>
                 </button>

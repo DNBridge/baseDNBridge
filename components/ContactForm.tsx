@@ -145,7 +145,7 @@ export default function ContactForm({ onSubmit, onSuccess }: ContactFormProps) {
           className={`w-full px-4 py-3 rounded-lg border-2 transition-colors text-black ${
             errors.projectType ? 'border-red-500' : 'border-medium-gray focus:border-primary-blue'
           } focus:outline-none focus:ring-2 focus:ring-primary-blue/20`}
-          placeholder="Ej: Gestor para inmobiliaria, App móvil, Sistema de facturación..."
+          placeholder="Ej: Plataforma SaaS, App móvil, Dashboard interno, E-commerce..."
         />
         {errors.projectType && (
           <p className="mt-1 text-sm text-red-500">{errors.projectType.message}</p>
@@ -177,7 +177,7 @@ export default function ContactForm({ onSubmit, onSuccess }: ContactFormProps) {
       <button
         type="submit"
         disabled={isSubmitting}
-        className="w-full bg-primary-blue text-primary-dark px-6 py-4 rounded-lg font-bold text-lg transition-all duration-300 shadow-lg hover:bg-[#00b8e6] hover:-translate-y-1 hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0"
+        className="w-full btn-secondary !px-6 !py-4 !text-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0"
       >
         {isSubmitting ? (
           <span className="flex items-center justify-center gap-2">

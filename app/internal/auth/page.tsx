@@ -58,7 +58,7 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-primary-blue via-[#00a8cc] to-primary-dark flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-primary-blue via-brand-blue to-primary-dark flex items-center justify-center p-4">
       <div className="w-full max-w-md">
         {/* Card de login */}
         <div className="bg-white rounded-2xl shadow-2xl p-8">
@@ -127,7 +127,7 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full bg-primary-blue text-primary-dark px-6 py-4 rounded-lg font-bold text-lg transition-all duration-300 shadow-lg hover:bg-[#00b8e6] hover:-translate-y-1 hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0"
+              className="w-full btn-secondary !px-6 !py-4 !text-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0"
             >
               {isSubmitting ? (
                 <span className="flex items-center justify-center gap-2">

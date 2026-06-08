@@ -2,57 +2,67 @@
 
 import { useState } from 'react'
 import { faqs } from '@/config/content'
+import SectionHeader from './ui/SectionHeader'
+import AnimatedSection from './ui/AnimatedSection'
 
 export default function FAQ() {
-  const [activeIndex, setActiveIndex] = useState<number | null>(null)
-
-  const toggleFAQ = (index: number) => {
-    setActiveIndex(activeIndex === index ? null : index)
-  }
+  const [activeIndex, setActiveIndex] = useState<number | null>(0)
 
   return (
-    <section className="py-24 bg-color-3">
-      <div className="container-custom">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-primary-dark mb-5">
-            Preguntas Frecuentes
-          </h2>
-          <p className="text-dark-gray max-w-2xl mx-auto text-lg leading-relaxed">
-            Encuentra respuestas a las preguntas más comunes sobre nuestros servicios.
-          </p>
-        </div>
+    <section id="faq" className="section-alt py-24 md:py-32">
+      <div className="container-custom relative z-10">
+        <AnimatedSection>
+          <SectionHeader
+            badge="FAQ"
+            title={
+              <>
+                Preguntas{' '}
+                <span className="gradient-text">frecuentes</span>
+              </>
+            }
+            subtitle="Respuestas claras sobre qué construimos, cómo trabajamos y qué podés esperar al contactarnos."
+          />
+        </AnimatedSection>
 
-        <div className="max-w-4xl mx-auto mt-16">
+        <div className="max-w-3xl mx-auto space-y-3">
           {faqs.map((faq, index) => (
-            <div
-              key={index}
-              className={`bg-light-gray rounded-xl mb-5 overflow-hidden transition-all duration-300 border-2 ${
-                activeIndex === index
-                  ? 'border-primary-blue'
-                  : 'border-transparent'
-              }`}
-            >
+            <AnimatedSection key={faq.question} delay={index * 60}>
               <div
-                className="p-6 cursor-pointer flex justify-between items-center font-semibold text-lg text-primary-dark transition-colors hover:text-primary-blue"
-                onClick={() => toggleFAQ(index)}
-              >
-                <span>{faq.question}</span>
-                <i
-                  className={`fas fa-chevron-down text-primary-blue text-xl transition-transform duration-300 ${
-                    activeIndex === index ? 'rotate-180' : ''
-                  }`}
-                ></i>
-              </div>
-              <div
-                className={`transition-all duration-300 overflow-hidden ${
+                className={`rounded-2xl overflow-hidden transition-all duration-500 border ${
                   activeIndex === index
-                    ? 'max-h-96 opacity-100 pb-6 px-6'
-                    : 'max-h-0 opacity-0'
+                    ? 'bg-white border-primary-blue/30 shadow-lg shadow-primary-blue/5'
+                    : 'bg-white/60 border-transparent hover:border-medium-gray'
                 }`}
               >
-                <p className="text-dark-gray leading-relaxed text-sm">{faq.answer}</p>
+                <button
+                  className="w-full p-5 md:p-6 flex justify-between items-center gap-4 text-left font-semibold text-primary-dark transition-colors hover:text-primary-blue"
+                  onClick={() => setActiveIndex(activeIndex === index ? null : index)}
+                  aria-expanded={activeIndex === index}
+                >
+                  <span className="text-base md:text-lg">{faq.question}</span>
+                  <span
+                    className={`flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center transition-all duration-300 ${
+                      activeIndex === index
+                        ? 'bg-primary-blue text-white rotate-180'
+                        : 'bg-light-gray text-dark-gray'
+                    }`}
+                  >
+                    <i className="fas fa-chevron-down text-sm" />
+                  </span>
+                </button>
+                <div
+                  className={`grid transition-all duration-500 ease-in-out ${
+                    activeIndex === index ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
+                  }`}
+                >
+                  <div className="overflow-hidden">
+                    <p className="px-5 md:px-6 pb-5 md:pb-6 text-dark-gray leading-relaxed text-sm md:text-base">
+                      {faq.answer}
+                    </p>
+                  </div>
+                </div>
               </div>
-            </div>
+            </AnimatedSection>
           ))}
         </div>
       </div>

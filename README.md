@@ -1,6 +1,6 @@
 # DNBridge Landing Page
 
-Landing page moderna para DNBridge, una empresa de desarrollo de software especializada en Health Tech.
+Landing page moderna para DNBridge, una software factory minimalista que desarrolla productos propios y proyectos a medida.
 
 ## 🚀 Tecnologías
 
@@ -85,7 +85,7 @@ npm start
 - ✅ TypeScript para type safety
 - ✅ Tailwind CSS para estilos
 - ✅ Componentes reutilizables
-- ✅ Enfoque en Health Tech
+- ✅ Software factory — productos y proyectos multi-industria
 
 ## 📄 Licencia
 
