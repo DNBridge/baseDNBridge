@@ -1,35 +1,56 @@
 'use client'
 
 import { services } from '@/config/content'
+import SectionHeader from './ui/SectionHeader'
+import AnimatedSection from './ui/AnimatedSection'
 
 export default function Services() {
   return (
-    <section id="servicios" className="py-24 bg-light-gray">
-      <div className="container-custom">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-primary-dark mb-5">
-            Nuestros Servicios
-          </h2>
-          <p className="text-dark-gray max-w-2xl mx-auto text-lg leading-relaxed">
-            Ofrecemos un enfoque integral para el desarrollo de software.
-            Adaptándonos a las 
-            necesidades específicas de cada cliente.
-          </p>
-        </div>
+    <section id="servicios" className="section-dark py-24 md:py-32">
+      <div className="absolute inset-0 bg-mesh-dark pointer-events-none" />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="container-custom relative z-10">
+        <AnimatedSection>
+          <SectionHeader
+            dark
+            badge="Servicios"
+            title={
+              <>
+                Soluciones integrales de{' '}
+                <span className="gradient-text">desarrollo</span>
+              </>
+            }
+            subtitle="Desde MVPs hasta plataformas en producción: web, mobile, APIs, cloud y productos propios para distintos tipos de negocio."
+          />
+        </AnimatedSection>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {services.map((service, index) => (
-            <div
-              key={index}
-              className="text-center bg-color-1 p-10 rounded-2xl transition-all duration-400 border-2 border-transparent hover:-translate-y-1 hover:shadow-xl hover:border-primary-blue group"
+            <AnimatedSection
+              key={service.title}
+              delay={index * 100}
+              className={index === 0 ? 'md:col-span-2 lg:col-span-1' : ''}
             >
-              <div className="w-24 h-24 mx-auto mb-6 bg-gradient-to-br from-primary-blue/10 to-accent-orange/5 rounded-full flex items-center justify-center transition-all duration-300 group-hover:scale-110 group-hover:bg-gradient-to-br group-hover:from-primary-blue/20 group-hover:to-accent-orange/10">
-                <i className={`${service.icon} text-primary-blue text-4xl`}></i>
+              <div
+                className={`glass-card-dark p-8 h-full group ${
+                  index === 0 ? 'lg:row-span-1 bg-gradient-to-br from-primary-blue/10 to-accent-violet/5' : ''
+                }`}
+              >
+                <div className="flex items-start justify-between mb-5">
+                  <div className="w-14 h-14 rounded-2xl bg-white/10 flex items-center justify-center
+                    group-hover:bg-primary-blue/20 transition-all duration-500 group-hover:scale-110">
+                    <i className={`${service.icon} text-primary-blue text-2xl`} />
+                  </div>
+                  <span className="text-white/20 text-4xl font-bold group-hover:text-primary-blue/30 transition-colors duration-500">
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
+                </div>
+                <h3 className="text-xl font-bold mb-3 text-white group-hover:text-primary-blue transition-colors duration-300">
+                  {service.title}
+                </h3>
+                <p className="text-white/60 leading-relaxed text-sm">{service.description}</p>
               </div>
-
-              <h3 className="text-xl font-semibold mb-4 text-primary-dark">{service.title}</h3>
-              <p className="text-dark-gray leading-relaxed">{service.description}</p>
-            </div>
+            </AnimatedSection>
           ))}
         </div>
       </div>

@@ -3,16 +3,18 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import { ToastProvider } from '@/contexts/ToastContext'
 import { ToastContainer } from '@/components/ToastContainer'
+import { brandConfig } from '@/config/brand'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'DNBridge - Software Factory',
-  description: 'DNBridge conecta tus visiones empresariales con soluciones tecnológicas de vanguardia. Especialistas en desarrollo de software escalable.',
+  title: 'DN Bridge - Software Factory',
+  description:
+    'Software factory minimalista. Desarrollamos productos propios y proyectos a medida para distintos sectores e industrias.',
   icons: {
-    icon: '/images/logo2.png',
-    shortcut: '/images/logo2.png',
-    apple: '/images/logo2.png',
+    icon: brandConfig.icon.src,
+    shortcut: brandConfig.icon.src,
+    apple: brandConfig.icon.apple,
   },
 }
 
@@ -28,7 +30,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
         />
-        <link rel="icon" href="/images/logo2.png" type="image/png" />
       </head>
       <body className={inter.className}>
         <ToastProvider>

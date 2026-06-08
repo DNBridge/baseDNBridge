@@ -10,7 +10,7 @@ const contactSchema = z.object({
   email: z.string().email(),
   phone: z.string().optional(),
   company: z.string().optional(),
-  projectType: z.enum(['Health Tech', 'General', 'Other']),
+  projectType: z.string().min(3),
   message: z.string().min(10),
   budget: z.string().optional(),
   website: z.string().max(0).optional(), // Honeypot

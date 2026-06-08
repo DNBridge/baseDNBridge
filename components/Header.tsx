@@ -1,238 +1,152 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import Image from 'next/image'
 import ContactModal from './ContactModal'
+import BrandLogo from './BrandLogo'
 import { useContactModal } from '@/hooks/useContactModal'
+import { useActiveSection } from '@/hooks/useActiveSection'
+import { heroContent } from '@/config/content'
+import { brandConfig } from '@/config/brand'
+
+const NAV_ITEMS = [
+  { id: 'servicios', label: 'Servicios' },
+  { id: 'tecnologias', label: 'Tecnologías' },
+  { id: 'nosotros', label: 'Nosotros' },
+  { id: 'faq', label: 'FAQ' },
+]
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const { isOpen, openModal, closeModal, submitContact } = useContactModal()
+  const activeSection = useActiveSection(NAV_ITEMS.map((item) => item.id))
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50)
-    }
-
+    const handleScroll = () => setScrolled(window.scrollY > 20)
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  // Cerrar menú móvil al cambiar tamaño de ventana
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth >= 768) {
-        setIsMobileMenuOpen(false)
-      }
+      if (window.innerWidth >= 768) setIsMobileMenuOpen(false)
     }
-
     window.addEventListener('resize', handleResize)
     return () => window.removeEventListener('resize', handleResize)
   }, [])
 
-  // Prevenir scroll del body cuando el menú móvil está abierto
   useEffect(() => {
-    if (isMobileMenuOpen) {
-      document.body.style.overflow = 'hidden'
-    } else {
-      document.body.style.overflow = 'unset'
-    }
-    return () => {
-      document.body.style.overflow = 'unset'
-    }
+    document.body.style.overflow = isMobileMenuOpen ? 'hidden' : 'unset'
+    return () => { document.body.style.overflow = 'unset' }
   }, [isMobileMenuOpen])
 
   const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault()
-    const element = document.querySelector(id)
+    const element = document.getElementById(id)
     if (element) {
-      const offset = 80
-      const elementPosition = element.getBoundingClientRect().top
-      const offsetPosition = elementPosition + window.pageYOffset - offset
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth',
-      })
-      // Cerrar menú móvil después de hacer clic
+      const offset = 100
+      const top = element.getBoundingClientRect().top + window.pageYOffset - offset
+      window.scrollTo({ top, behavior: 'smooth' })
       setIsMobileMenuOpen(false)
     }
   }
 
-  const handleContactClick = () => {
-    openModal()
-    setIsMobileMenuOpen(false)
-  }
-
   return (
-    <header
-      className={`fixed top-0 w-full bg-color-2 z-50 transition-all duration-300 ${
-        scrolled ? 'shadow-lg' : 'shadow-sm'
-      }`}
-    >
-      <div className="container-custom">
-        <div className="flex justify-between items-center py-2">
-          {/* Logo */}
-          <div className="flex items-center transition-transform duration-300 hover:scale-105 cursor-pointer">
-            <Image 
-              src="/images/logo2.png"
-              alt="DNBridge Logo"
-              width={118}
-              height={34}
-              className="h-28 md:h-32 w-auto object-contain"
-              style={{ 
-                maxHeight: '128px'
-              }}
-              priority
-            />
-          </div>
+    <>
+      <header className="fixed top-0 left-0 right-0 z-50 px-4 md:px-6 pt-4">
+        <div
+          className={`container-custom mx-auto flex items-center justify-between gap-4 rounded-2xl px-4 md:px-6 py-2 md:py-2.5 transition-all duration-500 bg-primary-dark ${
+            scrolled
+              ? 'border border-white/10 shadow-2xl shadow-primary-dark/30'
+              : 'border border-white/5'
+          }`}
+        >
+          <a
+            href="#"
+            onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }) }}
+            className="flex-shrink-0 -my-1 transition-transform duration-300 hover:scale-105"
+          >
+            <BrandLogo className={brandConfig.logo.headerClassName} priority />
+          </a>
 
-          {/* Navegación Desktop - Oculto en mobile */}
-          <nav className="hidden md:flex items-center gap-6">
-            <ul className="flex gap-6">
-              <li>
-                <a
-                  href="#servicios"
-                  onClick={(e) => scrollToSection(e, '#servicios')}
-                  className="text-primary-dark font-medium transition-all duration-300 relative hover:text-primary-blue after:content-[''] after:absolute after:w-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-primary-blue after:transition-all after:duration-300 hover:after:w-full"
-                >
-                  Servicios
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#proyectos"
-                  onClick={(e) => scrollToSection(e, '#proyectos')}
-                  className="text-primary-dark font-medium transition-all duration-300 relative hover:text-primary-blue after:content-[''] after:absolute after:w-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-primary-blue after:transition-all after:duration-300 hover:after:w-full"
-                >
-                  Proyectos
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#nosotros"
-                  onClick={(e) => scrollToSection(e, '#nosotros')}
-                  className="text-primary-dark font-medium transition-all duration-300 relative hover:text-primary-blue after:content-[''] after:absolute after:w-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-primary-blue after:transition-all after:duration-300 hover:after:w-full"
-                >
-                  Nosotros
-                </a>
-              </li>
-            </ul>
+          <nav className="hidden lg:flex items-center gap-1 bg-white/5 rounded-xl p-1 border border-white/5">
+            {NAV_ITEMS.map((item) => (
+              <a
+                key={item.id}
+                href={`#${item.id}`}
+                onClick={(e) => scrollToSection(e, item.id)}
+                className={`nav-link ${activeSection === item.id ? 'nav-link-active' : ''}`}
+              >
+                {item.label}
+                {activeSection === item.id && (
+                  <span className="absolute bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-primary-blue" />
+                )}
+              </a>
+            ))}
           </nav>
 
-          {/* Botón Contactar Desktop - Oculto en mobile */}
           <button
             onClick={openModal}
-            className="hidden md:block bg-accent-orange text-white px-6 py-3 rounded-lg font-semibold text-sm transition-all duration-300 shadow-lg hover:bg-[#e55a2b] hover:-translate-y-0.5 hover:shadow-xl"
+            className="hidden md:block btn-primary !px-5 !py-2.5 !text-sm"
           >
-            Contactar
+            <span className="hidden xl:inline">{heroContent.cta.primary.label}</span>
+            <span className="xl:hidden">{heroContent.cta.primary.shortLabel}</span>
           </button>
 
-          {/* Botón Hamburger Mobile - Solo visible en mobile */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden p-2 text-primary-dark hover:text-primary-blue transition-colors"
+            className="lg:hidden p-2 text-white/80 hover:text-white transition-colors rounded-lg hover:bg-white/10"
             aria-label="Toggle menu"
             aria-expanded={isMobileMenuOpen}
           >
-            {isMobileMenuOpen ? (
-              <i className="fas fa-times text-2xl"></i>
-            ) : (
-              <i className="fas fa-bars text-2xl"></i>
-            )}
+            <i className={`fas ${isMobileMenuOpen ? 'fa-times' : 'fa-bars'} text-xl`} />
           </button>
         </div>
-      </div>
+      </header>
 
-      {/* Menú Móvil - Drawer desde la derecha */}
+      {/* Mobile menu */}
       <div
-        className={`fixed inset-0 z-40 md:hidden transition-transform duration-300 ease-in-out ${
-          isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
+        className={`fixed inset-0 z-40 lg:hidden transition-opacity duration-300 ${
+          isMobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
         }`}
       >
-        {/* Overlay oscuro */}
         <div
-          className={`absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity duration-300 ${
-            isMobileMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
-          }`}
+          className="absolute inset-0 bg-primary-dark/90 backdrop-blur-md"
           onClick={() => setIsMobileMenuOpen(false)}
         />
-
-        {/* Panel del menú */}
-        <div className="absolute right-0 top-0 h-full w-80 max-w-[85vw] bg-color-2 shadow-2xl overflow-y-auto">
-          <div className="flex flex-col h-full">
-            {/* Header del menú móvil */}
-            <div className="flex justify-between items-center p-6 border-b-2 border-medium-gray">
-              <div className="flex items-center">
-                <Image 
-                  src="/images/logo2.png"
-                  alt="DNBridge Logo"
-                  width={100}
-                  height={29}
-                  className="h-20 w-auto object-contain"
-                  style={{ 
-                    maxHeight: '80px'
-                  }}
-                  priority
-                />
-              </div>
-              <button
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="p-2 text-primary-dark hover:text-primary-blue transition-colors"
-                aria-label="Cerrar menú"
-              >
-                <i className="fas fa-times text-xl"></i>
-              </button>
-            </div>
-
-            {/* Navegación móvil */}
-            <nav className="flex-1 p-6">
-              <ul className="space-y-4">
-                <li>
-                  <a
-                    href="#servicios"
-                    onClick={(e) => scrollToSection(e, '#servicios')}
-                    className="block py-3 px-4 text-primary-dark font-medium text-lg rounded-lg transition-all duration-300 hover:bg-primary-blue/10 hover:text-primary-blue"
-                  >
-                    Servicios
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#proyectos"
-                    onClick={(e) => scrollToSection(e, '#proyectos')}
-                    className="block py-3 px-4 text-primary-dark font-medium text-lg rounded-lg transition-all duration-300 hover:bg-primary-blue/10 hover:text-primary-blue"
-                  >
-                    Proyectos
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#nosotros"
-                    onClick={(e) => scrollToSection(e, '#nosotros')}
-                    className="block py-3 px-4 text-primary-dark font-medium text-lg rounded-lg transition-all duration-300 hover:bg-primary-blue/10 hover:text-primary-blue"
-                  >
-                    Nosotros
-                  </a>
-                </li>
-              </ul>
-            </nav>
-
-            {/* Botón Contactar en el menú móvil */}
-            <div className="p-6 border-t-2 border-medium-gray">
-              <button
-                onClick={handleContactClick}
-                className="w-full bg-accent-orange text-white px-6 py-4 rounded-lg font-semibold text-base transition-all duration-300 shadow-lg hover:bg-[#e55a2b] active:scale-95"
-              >
-                Contactar
-              </button>
-            </div>
-          </div>
-        </div>
+        <nav
+          className={`absolute top-24 left-4 right-4 bg-surface-card/95 backdrop-blur-xl border border-white/10 rounded-2xl p-6 transition-all duration-500 ${
+            isMobileMenuOpen ? 'translate-y-0 opacity-100' : '-translate-y-4 opacity-0'
+          }`}
+        >
+          <ul className="space-y-2">
+            {NAV_ITEMS.map((item) => (
+              <li key={item.id}>
+                <a
+                  href={`#${item.id}`}
+                  onClick={(e) => scrollToSection(e, item.id)}
+                  className={`flex items-center justify-between py-3 px-4 rounded-xl text-base font-medium transition-all duration-300 ${
+                    activeSection === item.id
+                      ? 'bg-primary-blue/10 text-primary-blue border border-primary-blue/20'
+                      : 'text-white/80 hover:bg-white/5 hover:text-white'
+                  }`}
+                >
+                  {item.label}
+                  {activeSection === item.id && <i className="fas fa-circle text-[6px] text-primary-blue" />}
+                </a>
+              </li>
+            ))}
+          </ul>
+          <button
+            onClick={() => { openModal(); setIsMobileMenuOpen(false) }}
+            className="w-full mt-6 btn-primary"
+          >
+            {heroContent.cta.primary.label}
+          </button>
+        </nav>
       </div>
 
       <ContactModal isOpen={isOpen} onClose={closeModal} onSubmit={submitContact} />
-    </header>
+    </>
   )
 }
