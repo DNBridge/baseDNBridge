@@ -102,7 +102,7 @@ export default function Footer() {
                   {companyConfig.email}
                 </a>
               </li>
-              <li>
+              <li className="space-y-2">
                 <a
                   href={`tel:${companyConfig.phone.replace(/\s/g, '')}`}
                   className="text-white/60 hover:text-primary-blue transition-colors text-sm inline-flex items-center gap-2"
@@ -110,10 +110,23 @@ export default function Footer() {
                   <i className="fas fa-phone text-primary-blue/60 w-4" />
                   {companyConfig.phone}
                 </a>
+                <p className="text-white/60 text-sm flex items-start gap-2">
+                  <i className="fas fa-map-marker-alt text-primary-blue/60 w-4 mt-0.5" />
+                  {companyConfig.address}
+                </p>
               </li>
-              <li className="text-white/60 text-sm flex items-start gap-2">
-                <i className="fas fa-map-marker-alt text-primary-blue/60 w-4 mt-0.5" />
-                {companyConfig.address}
+              <li className="space-y-2">
+                <a
+                  href={`tel:${companyConfig.phone2.replace(/\s/g, '')}`}
+                  className="text-white/60 hover:text-primary-blue transition-colors text-sm inline-flex items-center gap-2"
+                >
+                  <i className="fas fa-phone text-primary-blue/60 w-4" />
+                  {companyConfig.phone2}
+                </a>
+                <p className="text-white/60 text-sm flex items-start gap-2">
+                  <i className="fas fa-map-marker-alt text-primary-blue/60 w-4 mt-0.5" />
+                  {companyConfig.address2}
+                </p>
               </li>
             </ul>
           </div>

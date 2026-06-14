@@ -7,7 +7,9 @@ export interface CompanyConfig {
   name: string
   email: string
   phone: string
+  phone2: string
   address: string
+  address2: string
   socialMedia: {
     linkedin?: string
     twitter?: string
@@ -18,9 +20,11 @@ export interface CompanyConfig {
 
 export const companyConfig: CompanyConfig = {
   name: 'DNBridge',
-  email: 'dnbridgedevs@gmail.com', // Email público de contacto (se muestra en footer y emails)
-  phone: '+1 (234) 567-890',
-  address: 'Ciudad, País',
+  email: 'contacto@dnbridge.site', // Email público de contacto (se muestra en footer y emails)
+  phone: '+54 (351) 81840650',
+  address: 'Córdoba, Argentina',
+  phone2: '+55 (47) 988157843',
+  address2: 'Bombhinas,SC Brasil',
   socialMedia: {
     linkedin: 'https://linkedin.com/company/dnbridge',
     twitter: 'https://twitter.com/dnbridge',
