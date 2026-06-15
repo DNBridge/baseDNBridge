@@ -24,6 +24,7 @@ export default function BrandLogo({
       className={className}
       priority={priority}
       fetchPriority={priority ? 'high' : undefined}
+      unoptimized={priority}
     />
   )
 }
