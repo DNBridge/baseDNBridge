@@ -1,21 +1,18 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import { ToastProvider } from '@/contexts/ToastContext'
 import { ToastContainer } from '@/components/ToastContainer'
-import { brandConfig } from '@/config/brand'
+import { buildRootMetadata, seoConfig } from '@/config/seo'
 
 const inter = Inter({ subsets: ['latin'] })
 
-export const metadata: Metadata = {
-  title: 'DN Bridge - Software Factory',
-  description:
-    'Software factory minimalista. Desarrollamos productos propios y proyectos a medida para distintos sectores e industrias.',
-  icons: {
-    icon: brandConfig.icon.src,
-    shortcut: brandConfig.icon.src,
-    apple: brandConfig.icon.apple,
-  },
+export const metadata: Metadata = buildRootMetadata()
+
+export const viewport: Viewport = {
+  themeColor: seoConfig.themeColor,
+  width: 'device-width',
+  initialScale: 1,
 }
 
 interface RootLayoutProps {
