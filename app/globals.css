@@ -7,6 +7,15 @@
     scroll-behavior: smooth;
   }
 
+  [id='servicios'],
+  [id='tecnologias'],
+  [id='nosotros'],
+  [id='faq'],
+  [id='contacto'],
+  [id='features'] {
+    scroll-margin-top: 6.5rem;
+  }
+
   body {
     @apply bg-surface-light text-primary-dark antialiased;
     overflow-x: hidden;
