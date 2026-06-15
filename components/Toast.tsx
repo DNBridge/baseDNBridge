@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import Icon from './ui/Icon'
 
 // 🎯 Purpose: Define los tipos de notificaciones disponibles
 // 💡 Learning: TypeScript enum para type safety
@@ -48,7 +49,7 @@ export default function Toast({ message, type = 'success', duration = 5000, onCl
     success: 'fas fa-check-circle',
     error: 'fas fa-exclamation-circle',
     info: 'fas fa-info-circle',
-  }
+  } as const
 
   // Configuración de colores según el tipo
   const colors = {
@@ -79,7 +80,7 @@ export default function Toast({ message, type = 'success', duration = 5000, onCl
     >
       {/* Icono */}
       <div className={`flex-shrink-0 ${iconColors[type]}`}>
-        <i className={`${icons[type]} text-2xl`}></i>
+        <Icon name={icons[type]} className="w-6 h-6" />
       </div>
 
       {/* Mensaje */}
@@ -93,7 +94,7 @@ export default function Toast({ message, type = 'success', duration = 5000, onCl
         className="flex-shrink-0 text-gray-400 hover:text-gray-600 transition-colors"
         aria-label="Cerrar notificación"
       >
-        <i className="fas fa-times"></i>
+        <Icon name="fas fa-times" className="w-4 h-4" />
       </button>
     </div>
   )

@@ -2,6 +2,7 @@
 
 import { useEffect } from 'react'
 import ContactForm, { ContactFormData } from './ContactForm'
+import Icon from './ui/Icon'
 
 interface ContactModalProps {
   readonly isOpen: boolean
@@ -76,7 +77,7 @@ export default function ContactModal({ isOpen, onClose, onSubmit }: ContactModal
             className="w-10 h-10 rounded-full bg-light-gray hover:bg-medium-gray transition-colors flex items-center justify-center text-primary-dark hover:text-primary-blue"
             aria-label="Cerrar modal"
           >
-            <i className="fas fa-times"></i>
+            <Icon name="fas fa-times" className="w-4 h-4" />
           </button>
         </div>
 

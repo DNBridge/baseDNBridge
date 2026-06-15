@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import Icon from './ui/Icon'
 import ContactModal from './ContactModal'
 import { useContactModal } from '@/hooks/useContactModal'
 import { useActiveSection } from '@/hooks/useActiveSection'
@@ -112,7 +113,10 @@ export default function HeaderClient({ logo }: HeaderClientProps) {
             aria-label="Toggle menu"
             aria-expanded={isMobileMenuOpen}
           >
-            <i className={`fas ${isMobileMenuOpen ? 'fa-times' : 'fa-bars'} text-xl`} />
+            <Icon
+              name={isMobileMenuOpen ? 'fas fa-times' : 'fas fa-bars'}
+              className="w-5 h-5"
+            />
           </button>
         </div>
       </header>
@@ -145,7 +149,7 @@ export default function HeaderClient({ logo }: HeaderClientProps) {
                 >
                   {item.label}
                   {activeSection === item.id && (
-                    <i className="fas fa-circle text-[6px] text-primary-blue" />
+                    <Icon name="fas fa-circle" className="w-1.5 h-1.5 fill-current text-primary-blue" />
                   )}
                 </a>
               </li>

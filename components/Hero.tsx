@@ -1,6 +1,7 @@
 'use client'
 
 import ContactModal from './ContactModal'
+import Icon from './ui/Icon'
 import { useContactModal } from '@/hooks/useContactModal'
 import { heroContent } from '@/config/content'
 
@@ -62,16 +63,16 @@ export default function Hero() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-4 animate-fade-in-up">
             <button onClick={openModal} className="btn-primary">
               {heroContent.cta.primary.label}
-              <i className={`${heroContent.cta.primary.icon} ml-2 text-sm`} />
+              <Icon name={heroContent.cta.primary.icon} className="ml-2 w-4 h-4" />
             </button>
             <button onClick={scrollToServices} className="btn-secondary">
               {heroContent.cta.secondary.label}
-              <i className={`${heroContent.cta.secondary.icon} ml-2 text-sm`} />
+              <Icon name={heroContent.cta.secondary.icon} className="ml-2 w-4 h-4" />
             </button>
           </div>
 
           <p className="text-sm text-[#E8E8FF]/50 mb-14 animate-fade-in-up">
-            <i className="fas fa-check-circle text-accent-orange mr-1.5" />
+            <Icon name="fas fa-check-circle" className="text-accent-orange mr-1.5 w-4 h-4 inline" />
             {heroContent.trustNote}
           </p>
 
@@ -83,7 +84,7 @@ export default function Hero() {
               >
                 <div className="w-10 h-10 mx-auto mb-3 rounded-xl bg-primary-blue/15 flex items-center justify-center
                   group-hover:bg-primary-blue/25 transition-colors duration-300">
-                  <i className={`${item.icon} text-primary-blue text-lg`} />
+                  <Icon name={item.icon} className="text-primary-blue w-5 h-5" />
                 </div>
                 <div className="text-sm font-bold text-white mb-0.5">{item.label}</div>
                 <div className="text-xs text-white/45">{item.description}</div>
@@ -94,7 +95,7 @@ export default function Hero() {
       </div>
 
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce text-white/30">
-        <i className="fas fa-chevron-down" />
+        <Icon name="fas fa-chevron-down" className="w-5 h-5" />
       </div>
 
       <ContactModal isOpen={isOpen} onClose={closeModal} onSubmit={submitContact} />

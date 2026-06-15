@@ -5,6 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { useState } from 'react'
 import { useToast } from '@/contexts/ToastContext'
+import Icon from './ui/Icon'
 
 const contactSchema = z.object({
   name: z.string().min(2, 'El nombre debe tener al menos 2 caracteres'),
@@ -181,7 +182,7 @@ export default function ContactForm({ onSubmit, onSuccess }: ContactFormProps) {
       >
         {isSubmitting ? (
           <span className="flex items-center justify-center gap-2">
-            <i className="fas fa-spinner fa-spin"></i>
+            <Icon name="fas fa-spinner fa-spin" className="w-4 h-4" />
             Enviando...
           </span>
         ) : (

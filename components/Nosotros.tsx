@@ -1,6 +1,7 @@
 'use client'
 
 import { aboutContent } from '@/config/content'
+import Icon from './ui/Icon'
 import SectionHeader from './ui/SectionHeader'
 import AnimatedSection from './ui/AnimatedSection'
 
@@ -31,7 +32,7 @@ export default function Nosotros() {
                   {section.icon && (
                     <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary-blue/20 to-accent-violet/10 flex items-center justify-center
                       group-hover:scale-110 transition-transform duration-500">
-                      <i className={`${section.icon} text-primary-blue text-xl`} />
+                      <Icon name={section.icon} className="text-primary-blue w-5 h-5" />
                     </div>
                   )}
                   <h3 className="text-xl md:text-2xl font-bold text-primary-dark">{section.title}</h3>

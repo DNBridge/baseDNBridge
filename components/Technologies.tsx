@@ -1,6 +1,7 @@
 'use client'
 
 import { techStacks, workMethodology } from '@/config/content'
+import Icon from './ui/Icon'
 import SectionHeader from './ui/SectionHeader'
 import AnimatedSection from './ui/AnimatedSection'
 
@@ -11,7 +12,7 @@ function StackCard({ stack, delay = 0 }: { stack: typeof techStacks[number]; del
         <div className="flex items-start gap-4 mb-5">
           <div className="w-12 h-12 rounded-xl bg-primary-blue/15 flex items-center justify-center flex-shrink-0
             group-hover:bg-primary-blue/25 transition-colors duration-300">
-            <i className={`${stack.icon} text-primary-blue text-xl`} />
+            <Icon name={stack.icon} className="text-primary-blue w-5 h-5" />
           </div>
           <div>
             <h3 className="text-lg font-bold text-white group-hover:text-brand-blue transition-colors duration-300">

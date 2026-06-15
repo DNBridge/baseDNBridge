@@ -13,8 +13,8 @@ export const brandConfig = {
   logo: {
     src: '/images/dnbridge-logo-nav.png',
     alt: 'DN Bridge - Software Factory',
-    width: 160,
-    height: 72,
+    width: 320,
+    height: 320,
     headerClassName: 'h-16 sm:h-[4.25rem] md:h-[4.75rem] lg:h-20 w-auto object-contain',
     footerClassName: 'h-20 md:h-24 lg:h-[5.75rem] w-auto object-contain',
   },
