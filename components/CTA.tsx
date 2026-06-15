@@ -3,6 +3,7 @@
 import ContactModal from './ContactModal'
 import { useContactModal } from '@/hooks/useContactModal'
 import { ctaContent } from '@/config/content'
+import Icon from './ui/Icon'
 import AnimatedSection from './ui/AnimatedSection'
 
 export default function CTA() {
@@ -44,7 +45,7 @@ export default function CTA() {
             <ul className="flex flex-wrap justify-center gap-x-6 gap-y-2 mb-10 text-sm text-[#E8E8FF]/60">
               {ctaContent.trustPoints.map((point) => (
                 <li key={point} className="inline-flex items-center gap-2">
-                  <i className="fas fa-check text-accent-orange text-xs" />
+                  <Icon name="fas fa-check" className="text-accent-orange w-3.5 h-3.5" />
                   {point}
                 </li>
               ))}
@@ -53,11 +54,11 @@ export default function CTA() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button onClick={openModal} className="btn-primary text-lg !px-10">
                 {ctaContent.cta.primary.label}
-                <i className={`${ctaContent.cta.primary.icon} ml-2`} />
+                <Icon name={ctaContent.cta.primary.icon} className="ml-2 w-5 h-5" />
               </button>
               <button onClick={scrollToNosotros} className="btn-secondary text-lg !px-10">
                 {ctaContent.cta.secondary.label}
-                <i className={`${ctaContent.cta.secondary.icon} ml-2`} />
+                <Icon name={ctaContent.cta.secondary.icon} className="ml-2 w-5 h-5" />
               </button>
             </div>
           </div>

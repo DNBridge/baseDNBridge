@@ -1,6 +1,7 @@
 'use client'
 
 import { features } from '@/config/content'
+import Icon from './ui/Icon'
 import SectionHeader from './ui/SectionHeader'
 import AnimatedSection from './ui/AnimatedSection'
 
@@ -29,7 +30,7 @@ export default function Features() {
               <div className="glass-card p-8 h-full group hover:border-primary-blue/30">
                 <div className="w-14 h-14 mb-5 rounded-2xl bg-gradient-to-br from-primary-blue/20 to-accent-violet/10 flex items-center justify-center
                   group-hover:from-primary-blue/30 group-hover:to-accent-violet/20 transition-all duration-500 group-hover:scale-110 group-hover:rotate-3">
-                  <i className={`${feature.icon} text-primary-blue text-2xl`} />
+                  <Icon name={feature.icon} className="text-primary-blue w-6 h-6" />
                 </div>
                 <h3 className="text-xl font-bold mb-3 text-primary-dark group-hover:text-primary-blue transition-colors duration-300">
                   {feature.title}

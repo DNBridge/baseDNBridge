@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { noIndexMetadata } from '@/config/seo'
+import { FontAwesomeStyles } from '@/components/FontAwesomeStyles'
 
 export const metadata: Metadata = noIndexMetadata
 
@@ -8,5 +9,10 @@ export default function InternalLayout({
 }: {
   readonly children: React.ReactNode
 }) {
-  return children
+  return (
+    <>
+      <FontAwesomeStyles />
+      {children}
+    </>
+  )
 }

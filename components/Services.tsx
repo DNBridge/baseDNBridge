@@ -1,6 +1,7 @@
 'use client'
 
 import { services } from '@/config/content'
+import Icon from './ui/Icon'
 import SectionHeader from './ui/SectionHeader'
 import AnimatedSection from './ui/AnimatedSection'
 
@@ -39,7 +40,7 @@ export default function Services() {
                 <div className="flex items-start justify-between mb-5">
                   <div className="w-14 h-14 rounded-2xl bg-white/10 flex items-center justify-center
                     group-hover:bg-primary-blue/20 transition-all duration-500 group-hover:scale-110">
-                    <i className={`${service.icon} text-primary-blue text-2xl`} />
+                    <Icon name={service.icon} className="text-primary-blue w-6 h-6" />
                   </div>
                   <span className="text-white/20 text-4xl font-bold group-hover:text-primary-blue/30 transition-colors duration-500">
                     {String(index + 1).padStart(2, '0')}

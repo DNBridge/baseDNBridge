@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { faqs } from '@/config/content'
+import Icon from './ui/Icon'
 import SectionHeader from './ui/SectionHeader'
 import AnimatedSection from './ui/AnimatedSection'
 
@@ -47,7 +48,7 @@ export default function FAQ() {
                         : 'bg-light-gray text-dark-gray'
                     }`}
                   >
-                    <i className="fas fa-chevron-down text-sm" />
+                    <Icon name="fas fa-chevron-down" className="w-4 h-4" />
                   </span>
                 </button>
                 <div

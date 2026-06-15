@@ -1,5 +1,7 @@
 import { companyConfig } from '@/config/company'
 import { brandConfig } from '@/config/brand'
+import Icon from './ui/Icon'
+import SocialIcon from './ui/SocialIcon'
 import BrandLogo from './BrandLogo'
 
 const FOOTER_LINKS = {
@@ -37,10 +39,10 @@ export default function Footer() {
             </p>
             <div className="flex gap-3">
               {[
-                { icon: 'fab fa-linkedin-in', url: companyConfig.socialMedia.linkedin },
-                { icon: 'fab fa-twitter', url: companyConfig.socialMedia.twitter },
-                { icon: 'fab fa-github', url: companyConfig.socialMedia.github },
-                { icon: 'fab fa-instagram', url: companyConfig.socialMedia.instagram },
+                { icon: 'fab fa-linkedin-in' as const, url: companyConfig.socialMedia.linkedin },
+                { icon: 'fab fa-twitter' as const, url: companyConfig.socialMedia.twitter },
+                { icon: 'fab fa-github' as const, url: companyConfig.socialMedia.github },
+                { icon: 'fab fa-instagram' as const, url: companyConfig.socialMedia.instagram },
               ]
                 .filter((s) => s.url)
                 .map((social) => (
@@ -52,7 +54,7 @@ export default function Footer() {
                     className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center
                       transition-all duration-300 hover:bg-primary-blue/20 hover:border-primary-blue/40 hover:-translate-y-1"
                   >
-                    <i className={`${social.icon} text-white/70 hover:text-primary-blue text-sm`} />
+                    <SocialIcon name={social.icon} className="text-white/70 w-4 h-4" />
                   </a>
                 ))}
             </div>
@@ -98,7 +100,7 @@ export default function Footer() {
                   href={`mailto:${companyConfig.email}`}
                   className="text-white/60 hover:text-primary-blue transition-colors text-sm inline-flex items-center gap-2"
                 >
-                  <i className="fas fa-envelope text-primary-blue/60 w-4" />
+                  <Icon name="fas fa-envelope" className="text-primary-blue/60 w-4 h-4" />
                   {companyConfig.email}
                 </a>
               </li>
@@ -107,11 +109,11 @@ export default function Footer() {
                   href={`tel:${companyConfig.phone.replace(/\s/g, '')}`}
                   className="text-white/60 hover:text-primary-blue transition-colors text-sm inline-flex items-center gap-2"
                 >
-                  <i className="fas fa-phone text-primary-blue/60 w-4" />
+                  <Icon name="fas fa-phone" className="text-primary-blue/60 w-4 h-4" />
                   {companyConfig.phone}
                 </a>
                 <p className="text-white/60 text-sm flex items-start gap-2">
-                  <i className="fas fa-map-marker-alt text-primary-blue/60 w-4 mt-0.5" />
+                  <Icon name="fas fa-map-marker-alt" className="text-primary-blue/60 w-4 h-4 mt-0.5" />
                   {companyConfig.address}
                 </p>
               </li>
@@ -120,11 +122,11 @@ export default function Footer() {
                   href={`tel:${companyConfig.phone2.replace(/\s/g, '')}`}
                   className="text-white/60 hover:text-primary-blue transition-colors text-sm inline-flex items-center gap-2"
                 >
-                  <i className="fas fa-phone text-primary-blue/60 w-4" />
+                  <Icon name="fas fa-phone" className="text-primary-blue/60 w-4 h-4" />
                   {companyConfig.phone2}
                 </a>
                 <p className="text-white/60 text-sm flex items-start gap-2">
-                  <i className="fas fa-map-marker-alt text-primary-blue/60 w-4 mt-0.5" />
+                  <Icon name="fas fa-map-marker-alt" className="text-primary-blue/60 w-4 h-4 mt-0.5" />
                   {companyConfig.address2}
                 </p>
               </li>
