@@ -23,6 +23,7 @@ export default function BrandLogo({
       height={intrinsicHeight}
       className={className}
       priority={priority}
+      fetchPriority={priority ? 'high' : undefined}
     />
   )
 }

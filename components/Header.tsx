@@ -22,17 +22,37 @@ export default function Header() {
   const activeSection = useActiveSection(NAV_ITEMS.map((item) => item.id))
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20)
-    window.addEventListener('scroll', handleScroll)
+    let ticking = false
+
+    const handleScroll = () => {
+      if (ticking) return
+      ticking = true
+      requestAnimationFrame(() => {
+        setScrolled(window.scrollY > 20)
+        ticking = false
+      })
+    }
+
+    handleScroll()
+    window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
   useEffect(() => {
+    let timeoutId: ReturnType<typeof setTimeout>
+
     const handleResize = () => {
-      if (window.innerWidth >= 768) setIsMobileMenuOpen(false)
+      clearTimeout(timeoutId)
+      timeoutId = setTimeout(() => {
+        if (window.innerWidth >= 768) setIsMobileMenuOpen(false)
+      }, 150)
     }
-    window.addEventListener('resize', handleResize)
-    return () => window.removeEventListener('resize', handleResize)
+
+    window.addEventListener('resize', handleResize, { passive: true })
+    return () => {
+      clearTimeout(timeoutId)
+      window.removeEventListener('resize', handleResize)
+    }
   }, [])
 
   useEffect(() => {
@@ -42,13 +62,8 @@ export default function Header() {
 
   const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault()
-    const element = document.getElementById(id)
-    if (element) {
-      const offset = 100
-      const top = element.getBoundingClientRect().top + window.pageYOffset - offset
-      window.scrollTo({ top, behavior: 'smooth' })
-      setIsMobileMenuOpen(false)
-    }
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    setIsMobileMenuOpen(false)
   }
 
   return (
